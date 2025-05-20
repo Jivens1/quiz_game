@@ -1,0 +1,71 @@
+/* General body styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Container holding the quiz */
+.quiz-container {
+  background-color: white;
+  padding: 30px 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  width: 360px;
+  text-align: center;
+}
+
+/* Question text */
+#question {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+/* Button container */
+#answer-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Option buttons */
+button {
+  padding: 10px;
+  font-size: 1rem;
+  border: 2px solid #007bff;
+  background-color: white;
+  color: #007bff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Hover effect */
+button:hover:not(:disabled) {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Correct and wrong answer styles */
+.correct {
+  background-color: #28a745 !important;
+  color: white !important;
+  border-color: #28a745 !important;
+}
+
+.wrong {
+  background-color: #dc3545 !important;
+  color: white !important;
+  border-color: #dc3545 !important;
+}
+
+/* Next button styling */
+#next-btn {
+  display: none;
+  width: 100%;
+}
