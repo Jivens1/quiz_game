@@ -171,7 +171,6 @@ function showScore() {
   nextButton.style.display = "block";
 }
 
-
 function handleNextButton() {
   currentQuestionIndex++;
   if (currentQuestionIndex < questions.length) {
