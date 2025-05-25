@@ -91,7 +91,7 @@ const questions = [
   }
 ];
 
-// Everything below remains unchanged
+// Elements
 const questionElement = document.getElementById("question");
 const answerButtons = document.getElementById("answer-buttons");
 const nextButton = document.getElementById("next-btn");
@@ -150,6 +150,15 @@ function selectAnswer(e) {
   });
 
   nextButton.style.display = "block";
+
+  // Auto-advance after 1.5 seconds
+  setTimeout(() => {
+    if (currentQuestionIndex < questions.length - 1) {
+      handleNextButton();
+    } else {
+      showScore();
+    }
+  }, 1500);
 }
 
 function showScore() {
