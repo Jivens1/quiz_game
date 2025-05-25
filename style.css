@@ -69,3 +69,14 @@ button:hover:not(:disabled) {
   display: none;
   width: 100%;
 }
+.correct {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+.incorrect {
+  background-color: #f44336; /* Red */
+  color: white;
+}
+
+
