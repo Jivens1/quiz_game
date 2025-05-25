@@ -79,4 +79,16 @@ button:hover:not(:disabled) {
   color: white;
 }
 
+#question h2 {
+  font-size: 2em;
+  margin-bottom: 0.5em;
+  color: #333;
+}
+
+#question p {
+  font-size: 1.2em;
+  color: #555;
+}
+
+
 
