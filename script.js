@@ -1,3 +1,4 @@
+// Questions array with text and answer options
 const questions = [
   {
     question: "What is the capital city of Canada?",
@@ -91,14 +92,19 @@ const questions = [
   }
 ];
 
-// Elements
+// DOM element references
 const questionElement = document.getElementById("question");
 const answerButtons = document.getElementById("answer-buttons");
 const nextButton = document.getElementById("next-btn");
+const feedbackElement = document.getElementById("feedback");
+const timerElement = document.getElementById("time");
 
 let currentQuestionIndex = 0;
 let score = 0;
+let timer;
+let timeLeft = 10; // Set timer to 10 seconds per your latest request
 
+// Start the quiz
 function startQuiz() {
   currentQuestionIndex = 0;
   score = 0;
@@ -106,11 +112,12 @@ function startQuiz() {
   showQuestion();
 }
 
+// Display a question
 function showQuestion() {
   resetState();
+  startTimer();
   let currentQuestion = questions[currentQuestionIndex];
-  let questionNo = currentQuestionIndex + 1;
-  questionElement.innerText = questionNo + ". " + currentQuestion.question;
+  questionElement.innerText = `${currentQuestionIndex + 1}. ${currentQuestion.question}`;
 
   currentQuestion.answers.forEach(answer => {
     const button = document.createElement("button");
@@ -124,22 +131,31 @@ function showQuestion() {
   });
 }
 
+// Reset answer area and timer
 function resetState() {
+  clearInterval(timer);
+  timeLeft = 10;
+  timerElement.textContent = timeLeft;
   nextButton.style.display = "none";
+  feedbackElement.innerText = "";
   while (answerButtons.firstChild) {
     answerButtons.removeChild(answerButtons.firstChild);
   }
 }
 
+// Handle user answer selection
 function selectAnswer(e) {
+  clearInterval(timer);
   const selectedBtn = e.target;
   const isCorrect = selectedBtn.dataset.correct === "true";
 
   if (isCorrect) {
     selectedBtn.classList.add("correct");
+    feedbackElement.innerText = "Correct! 🎉";
     score++;
   } else {
     selectedBtn.classList.add("wrong");
+    feedbackElement.innerText = "Oops! That's not correct.";
   }
 
   Array.from(answerButtons.children).forEach(button => {
@@ -150,27 +166,17 @@ function selectAnswer(e) {
   });
 
   nextButton.style.display = "block";
-
-  // Auto-advance after 1.5 seconds
-  setTimeout(() => {
-    if (currentQuestionIndex < questions.length - 1) {
-      handleNextButton();
-    } else {
-      showScore();
-    }
-  }, 1500);
 }
 
+// Display final score
 function showScore() {
   resetState();
-  questionElement.innerHTML = `
-    <h2>Your Final Score</h2>
-    <p>You scored <strong>${score}</strong> out of <strong>${questions.length}</strong>! 🎉</p>
-  `;
+  questionElement.innerText = `You scored ${score} out of ${questions.length}! 🎉`;
   nextButton.innerText = "Play Again";
   nextButton.style.display = "block";
 }
 
+// Handle next button click
 function handleNextButton() {
   currentQuestionIndex++;
   if (currentQuestionIndex < questions.length) {
@@ -180,6 +186,26 @@ function handleNextButton() {
   }
 }
 
+// Start countdown timer
+function startTimer() {
+  timer = setInterval(() => {
+    timeLeft--;
+    timerElement.textContent = timeLeft;
+    if (timeLeft === 0) {
+      clearInterval(timer);
+      feedbackElement.innerText = "Time's up!";
+      Array.from(answerButtons.children).forEach(button => {
+        if (button.dataset.correct === "true") {
+          button.classList.add("correct");
+        }
+        button.disabled = true;
+      });
+      nextButton.style.display = "block";
+    }
+  }, 1000);
+}
+
+// Next button click logic
 nextButton.addEventListener("click", () => {
   if (currentQuestionIndex < questions.length) {
     handleNextButton();
@@ -188,4 +214,5 @@ nextButton.addEventListener("click", () => {
   }
 });
 
+// Start the game
 startQuiz();
