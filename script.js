@@ -163,10 +163,14 @@ function selectAnswer(e) {
 
 function showScore() {
   resetState();
-  questionElement.innerText = `You scored ${score} out of ${questions.length}! 🎉`;
+  questionElement.innerHTML = `
+    <h2>Your Final Score</h2>
+    <p>You scored <strong>${score}</strong> out of <strong>${questions.length}</strong>! 🎉</p>
+  `;
   nextButton.innerText = "Play Again";
   nextButton.style.display = "block";
 }
+
 
 function handleNextButton() {
   currentQuestionIndex++;
