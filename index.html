@@ -2,20 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quiz Game</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="quiz-container">
-    <h1>Simple Quiz Game</h1>
-    <div id="question-box">
-      <p id="question">Question appears here</p>
-      <div id="answer-buttons"></div>
-      <button id="next-btn">Next</button>
+  <div class="app">
+    <h1>Quiz Game</h1>
+    <div class="quiz">
+      <h2 id="question">Question Text</h2>
+      <div id="answer-buttons" class="btn-grid"></div>
+      <div id="feedback" class="feedback"></div>
+      <div class="bottom-bar">
+        <span id="time">10</span> seconds left
+        <button id="next-btn" class="next-btn">Next</button>
+      </div>
     </div>
   </div>
-
   <script src="script.js"></script>
 </body>
 </html>
